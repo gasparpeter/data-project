@@ -11,10 +11,15 @@
 <body>
 
 <button id="getText">Get Text</button>
+<button id="getUsers">Get Users</button>
+<div id="output"></div>
 
 <script>
     document.getElementById('getText').addEventListener
     ("click", getText);
+
+    document.getElementById('getUsers').addEventListener
+    ("click", getUsers);
 
     function getText() {
         // fetch('sample.txt')
@@ -26,7 +31,19 @@
         //     })
         fetch('sample.txt')
             .then((res) => res.text())
-            .then((data) => console.log(data))
+            .then((data) => {
+                document.getElementById('output').innerHTML = data;
+            })
+            .catch((err) => console.log(err))
+    }
+    
+    function getUsers() {
+        fetch('users.json')
+            .then((res) => res.json())
+            .then((data) => {
+                let output = '<h2>Users</h2>';
+                console.log(data)
+            })
     }
 </script>
 
